@@ -1,0 +1,16 @@
+{
+    "name": "@tusent.io/filter-queries",
+    "version": "1.0.0",
+    "description": "A middleware for Express that makes it easier to check URL-queries.",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Tusentio/filter-queries.git"
+    },
+    "author": "Kevin Sundqvist Norlén",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Tusentio/filter-queries/issues"
+    },
+    "homepage": "https://github.com/Tusentio/filter-queries#readme"
+}
