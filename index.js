@@ -1,25 +1,24 @@
-/**
- * @param {any} [options]
- * @param {function (any, any, function () : void) : void} [options.violationHandler]
- * @returns {function (...string) : function (any, any, function () : void) : void}
- */
-module.exports = (options = {}) => {
-    const {
-        violationHandler = (_, res) => {
-            return res.sendStatus(400);
-        },
-    } = options;
+function filterQueries(
+    requiredParams,
+    violationHandler = (req, res, next) => {
+        res.sendStatus(400);
+    }
+) {
+    return (req, res, next) => {
+        for (const [key, value] of Object.entries(req.query)) {
+            if (!value) {
+                delete req.query[key];
+            }
+        }
 
-    return function (...required) {
-        return (req, res, next) => {
-            const queryKeys = new Set(Object.getOwnPropertyNames(req.query));
-            const missingKey = required.find((key) => !queryKeys.has(key));
-
-            if (missingKey !== undefined) {
+        for (const key of requiredParams) {
+            if (!req.query.hasOwnPropery(key) || typeof key != "string") {
                 return void violationHandler(req, res, next);
             }
+        }
 
-            next();
-        };
+        return next();
     };
-};
+}
+
+module.exports = filterQueries;
