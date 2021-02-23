@@ -12,7 +12,7 @@ function filterQueries(
         }
 
         for (const key of requiredParams) {
-            if (!req.query.hasOwnPropery(key) || typeof key != "string") {
+            if (!req.query.hasOwnProperty(key) || typeof key != "string") {
                 return void violationHandler(req, res, next);
             }
         }
